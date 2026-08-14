@@ -1,12 +1,13 @@
 #!/bin/bash
 # ec2-scheduler-setup.sh
 #
-# Creates EventBridge + Lambda rules to auto start/stop/terminate an EC2 instance.
+# Historical example that creates EventBridge and Lambda rules to start and
+# stop an EC2 instance on a daily schedule. Quill & Query's infrastructure is
+# decommissioned; review all values and permissions before adapting this script.
 #
 # Schedule (Eastern Time / EDT = UTC-4):
 #   Start:     Daily at 8:00 AM EDT  → 12:00 UTC
 #   Stop:      Daily at 11:00 PM EDT → 03:00 UTC (next calendar day in UTC)
-#   Terminate: March 21, 2026 at midnight EDT → 04:00 UTC March 21
 #
 # Usage:
 #   ./scripts/ec2-scheduler-setup.sh <instance-id> [region]
@@ -65,8 +66,7 @@ cat > /tmp/ec2-policy.json << EOF
     "Effect": "Allow",
     "Action": [
       "ec2:StartInstances",
-      "ec2:StopInstances",
-      "ec2:TerminateInstances"
+      "ec2:StopInstances"
     ],
     "Resource": "arn:aws:ec2:${REGION}:${ACCOUNT_ID}:instance/${INSTANCE_ID}"
   }]
@@ -98,9 +98,6 @@ def handler(event, context):
     elif action == 'stop':
         ec2.stop_instances(InstanceIds=[instance_id])
         print(f"Stopped {instance_id}")
-    elif action == 'terminate':
-        ec2.terminate_instances(InstanceIds=[instance_id])
-        print(f"Terminated {instance_id}")
     else:
         raise ValueError(f"Unknown action: {action}")
 PYEOF
@@ -180,9 +177,6 @@ create_rule "ec2-daily-start"     "cron(0 12 * * ? *)"       "start"
 # Daily stop: 11:00 PM EDT = 03:00 UTC (next day in UTC), every day
 create_rule "ec2-daily-stop"      "cron(0 3 * * ? *)"        "stop"
 
-# One-time terminate: midnight EDT March 21 = 04:00 UTC March 21, 2026
-create_rule "ec2-terminate-mar21" "cron(0 4 21 3 ? 2026)"    "terminate"
-
 # ── Step 5: Summary ────────────────────────────────────────────────────────────
 echo ""
 echo "Step 5/5: Cleaning up temp files..."
@@ -197,13 +191,12 @@ echo " Region:    $REGION"
 echo ""
 echo " Start:     Daily      8:00 AM EDT  (12:00 UTC)"
 echo " Stop:      Daily     11:00 PM EDT  (03:00 UTC)"
-echo " Terminate: Mar 21    midnight EDT  (04:00 UTC)"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "Resources created:"
 echo "  IAM Role:        $LAMBDA_ROLE_NAME"
 echo "  Lambda Function: $LAMBDA_FUNCTION_NAME"
-echo "  EventBridge:     ec2-daily-start, ec2-daily-stop, ec2-terminate-mar21"
+echo "  EventBridge:     ec2-daily-start, ec2-daily-stop"
 echo ""
 echo "To verify, run:"
 echo "  aws events list-rules --region $REGION --query 'Rules[?contains(Name, \`ec2\`)].{Name:Name,Schedule:ScheduleExpression}'"
