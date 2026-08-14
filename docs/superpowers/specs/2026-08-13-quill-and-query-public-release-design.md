@@ -6,9 +6,10 @@
 ## Summary
 
 Prepare the private `t-shahan/rag-article-app` repository for a later public
-portfolio release under the name **Quill & Query** and proposed GitHub slug
-`quill-and-query`. Preserve the existing commit history. The repository owner,
-not Codex, will perform the final GitHub rename and visibility change.
+portfolio release under the name **Quill & Query** and GitHub slug
+`quill-and-query`. Preserve the existing commit history. Codex is authorized to
+rename the private GitHub repository and push the reviewed commits. The
+repository owner will perform the final visibility change.
 
 Quill & Query will be presented as a decommissioned, source-grounded editorial
 research application. Its public documentation will emphasize the complete
@@ -30,8 +31,8 @@ the former AWS deployment.
 
 ## Non-Goals
 
-- Do not rename the GitHub repository or change its visibility.
-- Do not push, publish, deploy, or recreate cloud infrastructure.
+- Do not change GitHub visibility or make the repository public.
+- Do not deploy or recreate cloud infrastructure.
 - Do not rewrite or squash Git history.
 - Do not add application features, redesign the UI, or refactor the RAG
   architecture beyond changes required for branding and publication safety.
@@ -137,15 +138,15 @@ Before handoff:
 
 ## Handoff
 
-After implementation and verification, provide the owner with:
+After implementation and verification:
 
 - a summary of all local changes and verification results;
-- the exact GitHub repository name and suggested description;
-- a short manual checklist to rename the private repository to
-  `quill-and-query`, update the local remote if GitHub does not redirect it, and
-  change visibility to public;
-- an explicit reminder that Codex did not perform the rename, push, or
-  visibility change.
+- rename the private GitHub repository to `quill-and-query`;
+- update the local origin URL and push the reviewed commit series;
+- verify through GitHub metadata that the renamed repository is still private;
+- provide the suggested GitHub description and a short owner-only checklist for
+  the later visibility change;
+- state explicitly that Codex did not change repository visibility.
 
 ## Acceptance Criteria
 
@@ -159,5 +160,5 @@ After implementation and verification, provide the owner with:
 - `.env.example` contains placeholders only, and MIT licensing is present.
 - Local build, lint, Python compile, and Compose configuration checks pass, or
   any pre-existing failure is documented precisely.
-- GitHub remains private and retains its current name until the owner performs
-  the final release actions.
+- GitHub remains private, is renamed to `quill-and-query`, and contains the
+  reviewed commit series; only the owner will later make it public.
