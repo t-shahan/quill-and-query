@@ -22,7 +22,6 @@ export default function DataOverviewPage() {
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   function fetchArticles(q: string) {
-    setLoading(true)
     client
       .get<ArticlesResponse>('/api/articles', { params: { q, limit: LIMIT, skip: 0 } })
       .then((res) => {
@@ -38,7 +37,10 @@ export default function DataOverviewPage() {
   function handleSearch(value: string) {
     setQuery(value)
     if (debounceRef.current) clearTimeout(debounceRef.current)
-    debounceRef.current = setTimeout(() => fetchArticles(value), DEBOUNCE_MS)
+    debounceRef.current = setTimeout(() => {
+      setLoading(true)
+      fetchArticles(value)
+    }, DEBOUNCE_MS)
   }
 
   const subtitle = loading
