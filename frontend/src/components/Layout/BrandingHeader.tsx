@@ -146,7 +146,7 @@ export default function BrandingHeader() {
             textShadow: '0 0 12px rgba(240,224,160,0.6)',
           }}
         >
-          Prototype
+          Quill &amp; Query
         </span>
         <span className="text-[10px] font-medium tracking-widest text-[#7A6030]">
           v0.1

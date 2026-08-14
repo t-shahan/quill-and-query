@@ -39,7 +39,7 @@ export default function ChatPage() {
       <header className="flex-shrink-0 px-6 pt-6 pb-2">
         {!hasMessages && (
           <div className="text-center py-8">
-            <h1 className="text-2xl font-semibold text-gray-100 mb-1">RAG Article App</h1>
+            <h1 className="text-2xl font-semibold text-gray-100 mb-1">Quill &amp; Query</h1>
             <p className="text-sm text-gray-500">Ask anything across 25 curated articles.</p>
           </div>
         )}

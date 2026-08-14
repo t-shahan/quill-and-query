@@ -28,7 +28,7 @@ export default function LoginForm({ onSuccess }: Props) {
   return (
     <div className="flex items-center justify-center h-screen w-full">
       <div className="w-full max-w-sm px-8 py-10 rounded-2xl border border-white/10 bg-white/3">
-        <h1 className="text-xl font-semibold text-gray-100 mb-1">RAG Article App</h1>
+        <h1 className="text-xl font-semibold text-gray-100 mb-1">Quill &amp; Query</h1>
         <p className="text-sm text-gray-400 mb-6">Enter the password to continue.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">

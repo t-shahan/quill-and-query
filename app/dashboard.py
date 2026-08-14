@@ -67,7 +67,7 @@ def render_page_header(title: str, subtitle: str = ""):
     """, unsafe_allow_html=True)
 
 
-st.set_page_config(page_title="RAG Article App", layout="wide", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Quill & Query", layout="wide", initial_sidebar_state="expanded")
 
 # Disable scroll anchoring globally so the browser doesn't jump when
 # new elements (like expanders) are added to the DOM during rendering.
@@ -98,7 +98,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    st.markdown("<h2 style='text-align: center; margin-top: 4rem;'>RAG Article App</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; margin-top: 4rem;'>Quill &amp; Query</h2>", unsafe_allow_html=True)
     col = st.columns([1, 2, 1])[1]
     with col:
         with st.form("password_form"):
@@ -132,7 +132,7 @@ if "page" not in st.session_state:
 with st.sidebar:
     st.markdown(
         "<div style='font-size: 1.2rem; font-weight: 700; padding: 0.25rem 0 1rem 0;'>"
-        "RAG Article App</div>",
+        "Quill &amp; Query</div>",
         unsafe_allow_html=True,
     )
 

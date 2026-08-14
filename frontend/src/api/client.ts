@@ -10,7 +10,7 @@
  */
 import axios from 'axios'
 
-export const TOKEN_KEY = 'rag_token'
+export const TOKEN_KEY = 'quill_query_token'
 
 const client = axios.create({
   // In dev, Vite proxies /api → localhost:8000 (see vite.config.ts).

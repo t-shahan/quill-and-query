@@ -25,7 +25,7 @@ from routes.conversations import router as conversations_router
 from routes.projects import router as projects_router
 from routes.articles import router as articles_router
 
-app = FastAPI(title="RAG Article API")
+app = FastAPI(title="Quill & Query API")
 
 # Attach the rate limiter state so slowapi can find it on the app instance
 app.state.limiter = limiter
