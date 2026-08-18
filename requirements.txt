@@ -1,19 +1,17 @@
-# OpenAI — LLM (GPT-4o) and embeddings (text-embedding-3-small)
+# Ingestion pipeline dependencies (src/).
+# The FastAPI service has its own set in backend/requirements.txt.
+
+# OpenAI — embeddings (text-embedding-3-small) and chat completions
 openai
 
-# LangChain — RAG pipeline orchestration
-langchain
-langchain-openai
-langchain-community
+# LangChain text splitters — chunk articles into overlapping passages
+langchain-text-splitters
 
 # MongoDB — vector store client
 pymongo
 
 # AWS S3 — article storage
 boto3
-
-# Streamlit — dashboard UI
-streamlit
 
 # Environment variable management — loads .env into os.environ
 python-dotenv
