@@ -103,10 +103,9 @@ application was split into clearer boundaries:
 - MongoDB collections separate vectorized passages, article metadata,
   conversations, and projects.
 
-The original Streamlit implementation remains in `app/`, and the root
-`Dockerfile` is its historical container definition. The active two-service
-application uses `frontend/Dockerfile`, `backend/Dockerfile`, and
-`docker-compose.yml`.
+The Streamlit prototype has been removed; it remains available in the
+repository's Git history. The current two-service application is defined by
+`frontend/Dockerfile`, `backend/Dockerfile`, and `docker-compose.yml`.
 
 ## Security and reliability
 
@@ -174,14 +173,16 @@ have them:
 pip install -r requirements.txt
 ```
 
-The repository includes a small generated article corpus for demonstration.
-Upload it to S3, then chunk, embed, and store it in MongoDB:
+`src/generate_articles.py` carries a small demonstration corpus inline and
+uploads it to S3. Run it, then chunk, embed, and store the articles in MongoDB:
 
 ```bash
 python src/generate_articles.py
 python src/embed_articles.py
-python scripts/create_indexes.py
 ```
+
+The backend creates its own MongoDB indexes at startup, so no separate indexing
+step is required.
 
 In MongoDB Atlas, create a Vector Search index named `vector_index` for the
 `articles` collection:
@@ -215,8 +216,7 @@ to the FastAPI service. The API health endpoint is available at
 frontend/   React, TypeScript, Tailwind CSS, Vite, and Nginx
 backend/    FastAPI routes, authentication, rate limiting, and MongoDB access
 src/        Article generation, ingestion, embedding, retrieval, and RAG logic
-scripts/    Database indexing and retired AWS deployment examples
-app/        Retained Streamlit prototype
+scripts/    Retired AWS deployment examples
 ```
 
 ## Deployment history

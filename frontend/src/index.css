@@ -14,7 +14,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle noise grain overlay — matches Streamlit app aesthetic */
+/* Subtle noise grain overlay — adds paper-like texture to the dark surface */
 body::before {
   content: '';
   position: fixed;

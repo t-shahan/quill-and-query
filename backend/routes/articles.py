@@ -4,8 +4,9 @@ Uses a dedicated article_metadata collection for titles, previews, and
 search — separate from the (potentially huge) articles chunk collection.
 
 Scalability notes:
-- article_metadata has a text index on `title` for fast server-side search.
-  For millions of articles, swap $regex for MongoDB Atlas Search (Lucene).
+- Search is a case-insensitive $regex over `title`, which does not use an
+  index. For a corpus of this size that is fine; for millions of articles,
+  swap it for MongoDB Atlas Search (Lucene).
 - list_articles() is paginated (limit/skip) so the frontend never loads all
   records at once.
 - ensure_metadata() populates article_metadata from the articles collection

@@ -8,7 +8,7 @@ import os
 from pymongo import MongoClient, ASCENDING, DESCENDING
 
 _client = MongoClient(os.getenv("MONGODB_URI"))
-_db = _client[os.getenv("MONGODB_DB", "rag_db")]
+_db = _client[os.getenv("MONGODB_DB", "quill_query")]
 
 conversations_col = _db["conversations"]
 projects_col = _db["projects"]

@@ -1,7 +1,7 @@
 /**
  * ChatPage — the main chat interface.
  *
- * Empty state: hero title + 4 clickable starter prompts (same as Streamlit).
+ * Empty state: hero title + 4 clickable starter prompts.
  * Active state: MessageList + ChatInput.
  *
  * session_id lives in the URL (?session_id=uuid). When a new conversation is

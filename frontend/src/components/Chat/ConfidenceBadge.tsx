@@ -1,6 +1,6 @@
 /**
  * ConfidenceBadge — colored dot + percentage showing how confident the RAG retrieval was.
- * Green ≥70%, orange 40–69%, red <40%. Mirrors the Streamlit implementation.
+ * Green ≥70%, orange 40–69%, red <40%.
  */
 interface Props {
   confidence: number | null | undefined
